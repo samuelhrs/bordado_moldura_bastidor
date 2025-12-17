@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bordado Moldura</title>
+    <link rel="shortcut icon" href="embroidery.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            padding: 50px;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            max-width: 500px;
+            margin: auto;
+            background: #fff;
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .loading{
+            width: 35px;
+            animation: spin 2s infinite linear;
+        }
+        @keyframes spin {
+            from{
+                transform: rotate(0deg);
+            }
+            to{
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1>Moldura</h1>
+<form>
+    <label for="tipo">Moldura:</label>
+    <select id="moldura" required>
+        <option value="molduraPequeno">Moldura - 20 cm</option>
+        <option value="molduraMedio">Moldura - 25 cm</option>
+    </select>
+    
+        <label for="tipo">Algodão:</label>
+    <select id="algodao" required>
+        <option value="algodaoM">Algodão - 20 cm</option>
+        <option value="algodaoG">Algodão - 25 cm</option>
+    </select>
+
+    <label for="tipo">Linha (metros):</label>
+    <input type="number" id="linha" placeholder="digite a quantidade de linha gasta">
+
+    <label for="tipo">Fita Para Acabamento (metros):</label>
+    <input type="number" id="fita" placeholder="digite a quantidade de fita gasta">
+
+
+    <label for="tipo">Etiqueta da Marca:</label>
+    <input type="number" id="etiqueta" value="1">
+
+    <label for="tipo">Papel Craft (metros):</label>
+    <input type="number" id="papel" placeholder="digite a quantidade de papel gasto">
+
+    <label for="tipo">Plástico Bolha (metros):</label>
+    <input type="number" id="bolha" placeholder="digite a quantidade de plástico bolha gasto">
+
+
+    <label for="tipo">Adesivo - Cuidado Frágil:</label>
+    <input type="number" id="adesivo" placeholder="digite a quantidade de adesivo usado">
+    
+    <label for="tipo">Lacre de Segurança:</label>
+    <input type="number" id="lacre" placeholder="digite a quantidade de lacre usado">
+    
+    <label for="tipo">Cartão de Visita:</label>
+    <input type="number" id="visita" placeholder="digite a quantidade de cartão de visita">
+
+    <label for="tipo">Cuidados com o Bordado:</label>
+    <input type="number" id="flyer" placeholder="digite a quantidade de flyer">
+
+    <label for="tipo">Caixa - Correio:</label>
+    <input type="number" id="caixa" placeholder="digite a quantidade de caixas usadas">
+
+    <label for="tipo">Etiqueta - Correio:</label>
+    <input type="number" id="etiquetaCorreio" placeholder="digite a quantidade de etiquetas usadas">
+
+    <label for="tipo">Passagem de Ônibus:</label>
+    <input type="number" id="passagemOnibus" placeholder="digite o valor da passagem">
+
+    <label for="tipo">Criação de Layout:</label>
+    <input type="number" id="layout" value="10">
+
+    <label for="tipo">Depreciação de Material:</label>
+    <input type="number" id="depreciacao" value="7.15">
+
+    <label for="tipo">Custo Fixo:</label>
+    <input type="number" id="custoFixo" value="20">
+
+    <label for="tipo">Hora Total do Bordado:</label>
+    <input type="number" id="hora" placeholder="digite a quantidade de horas trabalhadas">
+
+    <button onclick="calcularTotal(event)">Calcular Total</button>
+</form>
+
+<script>
+    const button = document.querySelector('button');
+
+    function calcularTotal(event) {
+        event.preventDefault();
+        // Valores fixos para tamanhos
+        const valores = {
+            molduraPequeno: 13,
+            molduraMedio: 14, 
+
+            algodaoM: 0.47, //20cm
+            algodaoG: 0.78, //25cm
+        };
+
+        // Obter seleções
+        const moldura = document.getElementById("moldura").value;
+        const cordao = document.getElementById("cordao").value;
+        const algodao = document.getElementById("algodao").value;
+
+        // Obter entradas numéricas
+        const linha = parseFloat(document.getElementById("linha").value) || 0;
+        const fita = parseFloat(document.getElementById("fita").value) || 0;
+        const cartaoVisita = parseFloat(document.getElementById("visita").value) || 0;
+        const flyer = parseFloat(document.getElementById("flyer").value) || 0;
+        const papel = parseFloat(document.getElementById("papel").value) || 0;
+        const adesivo = parseFloat(document.getElementById("adesivo").value) || 0;
+        const hora = parseFloat(document.getElementById("hora").value) || 0;
+        const caixa = parseFloat(document.getElementById("caixa").value) || 0;
+        const etiquetaC = parseFloat(document.getElementById("etiquetaCorreio").value) || 0;
+        const etiquetaM = parseFloat(document.getElementById("etiqueta").value) || 0;
+        const passagemOnibus = parseFloat(document.getElementById("passagemOnibus").value) || 0;
+        const layout = parseFloat(document.getElementById("layout").value) || 0;
+        const depreciacao = parseFloat(document.getElementById("depreciacao").value)  || 0;
+        const custoFixo = parseFloat(document.getElementById("custoFixo").value) || 0;
+        
+
+        // Valor por metro de linha, papel, adesivo (você pode ajustar)
+        const precoPorMetroLinha = 0.43;
+        const precoPorFolhaPapel = 0.21;
+        const precoPorAdesivo = 0.02;
+        const precoCartaoVisita = 0.36;
+        const precoFlyer = 0.40;
+        // valor fita
+        const valorHora = 6.90;
+        const valorCaixa = 2.10;
+        const etiquetaCorreio = 0.75;
+        const etiquetaMarca = 0.26;
+        
+        // Cálculo
+        const total =
+            (valores[moldura] || 0) +
+            (valores[algodao] || 0) +
+            (linha * precoPorMetroLinha) +
+            (papel * precoPorFolhaPapel) +
+            (adesivo * precoPorAdesivo) +
+            (cartaoVisita * precoCartaoVisita) +
+            (flyer * precoFlyer) +
+            (hora * valorHora) + 
+            (caixa * valorCaixa) +
+            (etiquetaC * etiquetaCorreio) +
+            (etiquetaM * etiquetaMarca) +
+            passagemOnibus +
+            layout +
+            depreciacao +
+            custoFixo;
+
+        const insumos = total + (total * 0.1);
+        const lucro = insumos * 0.3;
+        
+
+          alert(
+            "Custo base: R$ " + total.toFixed(2) + "\n" +
+            "Total com 10% (tinta, cola, impermeabilizante, etc): R$ " + insumos.toFixed(2) +  "\n" + 
+            "Total final com 30% de lucro: R$ " + (insumos + lucro).toFixed(2)
+
+        );
+    }
+</script>
+</body>
+</html>
