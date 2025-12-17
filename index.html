@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bordado Moldura</title>
+    <title>Bordado - Moldura + Bastidor</title>
     <link rel="shortcut icon" href="embroidery.png" type="image/x-icon">
     <style>
         body {
@@ -61,7 +61,7 @@
 </head>
 <body>
 
-<h1>Moldura</h1>
+<h1>Moldura + Bastidor</h1>
 <form>
     <label for="tipo">Moldura:</label>
     <select id="moldura" required>
@@ -69,10 +69,10 @@
         <option value="molduraMedio">Moldura - 25 cm</option>
     </select>
     
-        <label for="tipo">Algodão:</label>
+    <label for="tipo">Algodão para Moldura:</label>
     <select id="algodao" required>
-        <option value="algodaoM">Algodão - 20 cm</option>
-        <option value="algodaoG">Algodão - 25 cm</option>
+        <option value="algodaoM">Algodão Moldura - 20 cm</option>
+        <option value="algodaoG">Algodão Moldura - 25 cm</option>
     </select>
 
     <label for="tipo">Linha (metros):</label>
@@ -81,6 +81,22 @@
     <label for="tipo">Fita Para Acabamento (metros):</label>
     <input type="number" id="fita" placeholder="digite a quantidade de fita gasta">
 
+    <label for="tipo">Bastidor:</label>
+    <select id="bastidor" required>
+        <option value="bastidorPequeno">Bastidor - 12 cm</option>
+        <option value="bastidorMedio">Bastidor - 15 cm</option>
+        <option value="bastidorGrande">Bastidor - 20 cm</option>
+    </select>
+
+    <label for="tipo">Algodão para Bastidor:</label>
+    <select id="algodaoBastidor" required>
+        <option value="algodaoBP">Algodão Bastidor - 12 cm</option>
+        <option value="algodaoBM">Algodão Bastidor - 15 cm</option>
+        <option value="algodaoBG">Algodão Bastidor - 20 cm</option>
+    </select>
+
+    <label for="tipo">Linha Bastidor (metros):</label>
+    <input type="number" id="linhaBastidor" placeholder="digite a quantidade de linha gasta no bastidor">
 
     <label for="tipo">Etiqueta da Marca:</label>
     <input type="number" id="etiqueta" value="1">
