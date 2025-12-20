@@ -70,29 +70,27 @@
     </select>
     
     <label for="tipo">Algodão para Moldura:</label>
-    <select id="algodao" required>
-        <option value="algodaoM">Algodão Moldura - 20 cm</option>
-        <option value="algodaoG">Algodão Moldura - 25 cm</option>
+    <select id="algodaoMoldura" required>
+        <option value="algodaoMolduraPequeno">Algodão Moldura - 20 cm</option>
+        <option value="algodaoMolduraGrande">Algodão Moldura - 25 cm</option>
     </select>
 
     <label for="tipo">Linha (metros):</label>
-    <input type="number" id="linha" placeholder="digite a quantidade de linha gasta">
+    <input type="number" id="linhaMoldura" placeholder="digite a quantidade de linha gasta">
 
     <label for="tipo">Fita Para Acabamento (metros):</label>
     <input type="number" id="fita" placeholder="digite a quantidade de fita gasta">
 
     <label for="tipo">Bastidor:</label>
     <select id="bastidor" required>
-        <option value="bastidorPequeno">Bastidor - 12 cm</option>
-        <option value="bastidorMedio">Bastidor - 15 cm</option>
+        <option value="bastidorPequeno">Bastidor - 15 cm</option>
         <option value="bastidorGrande">Bastidor - 20 cm</option>
     </select>
 
     <label for="tipo">Algodão para Bastidor:</label>
     <select id="algodaoBastidor" required>
-        <option value="algodaoBP">Algodão Bastidor - 12 cm</option>
-        <option value="algodaoBM">Algodão Bastidor - 15 cm</option>
-        <option value="algodaoBG">Algodão Bastidor - 20 cm</option>
+        <option value="algodaoBastidorPequeno">Algodão Bastidor - 15 cm</option>
+        <option value="algodaoBastidorGrande">Algodão Bastidor - 20 cm</option>
     </select>
 
     <label for="tipo">Linha Bastidor (metros):</label>
@@ -101,27 +99,37 @@
     <label for="tipo">Etiqueta da Marca:</label>
     <input type="number" id="etiqueta" value="1">
 
+    <label for="tipo">Papel Seda:</label>
+    <input type="number" id="papel_seda" value=1>
+
+
     <label for="tipo">Papel Craft (metros):</label>
-    <input type="number" id="papel" placeholder="digite a quantidade de papel gasto">
+    <input type="number" id="papel_craft" placeholder="digite a quantidade de papel gasto">
 
     <label for="tipo">Plástico Bolha (metros):</label>
     <input type="number" id="bolha" placeholder="digite a quantidade de plástico bolha gasto">
 
 
     <label for="tipo">Adesivo - Cuidado Frágil:</label>
-    <input type="number" id="adesivo" placeholder="digite a quantidade de adesivo usado">
+    <input type="number" id="adesivo" value="1">
     
     <label for="tipo">Lacre de Segurança:</label>
-    <input type="number" id="lacre" placeholder="digite a quantidade de lacre usado">
+    <input type="number" id="lacre" value="1">
     
     <label for="tipo">Cartão de Visita:</label>
-    <input type="number" id="visita" placeholder="digite a quantidade de cartão de visita">
+    <input type="number" id="visita" value="1">
 
     <label for="tipo">Cuidados com o Bordado:</label>
-    <input type="number" id="flyer" placeholder="digite a quantidade de flyer">
+    <input type="number" id="flyer" value="1">
+
+    <label for="tipo">Cartinha + Envelope:</label>
+    <input type="number" id="cartinha" value="1">
+
+    <label for="tipo">Caderno de Brinde:</label>
+    <input type="number" id="caderno" value="1">
 
     <label for="tipo">Caixa - Correio:</label>
-    <input type="number" id="caixa" placeholder="digite a quantidade de caixas usadas">
+    <input type="number" id="caixa" value="1">
 
     <label for="tipo">Etiqueta - Correio:</label>
     <input type="number" id="etiquetaCorreio" placeholder="digite a quantidade de etiquetas usadas">
@@ -133,7 +141,7 @@
     <input type="number" id="layout" value="10">
 
     <label for="tipo">Depreciação de Material:</label>
-    <input type="number" id="depreciacao" value="7.15">
+    <input type="number" id="depreciacao" value="8.74">
 
     <label for="tipo">Custo Fixo:</label>
     <input type="number" id="custoFixo" value="20">
@@ -151,66 +159,87 @@
         event.preventDefault();
         // Valores fixos para tamanhos
         const valores = {
-            molduraPequeno: 13,
-            molduraMedio: 14, 
+            molduraPequeno: 31, // 20cm
+            molduraMedio: 37, // 25cm
+            algodaoMolduraPequeno: 0.80,
+            algodaoMolduraGrande: 1.27,
 
-            algodaoM: 0.47, //20cm
-            algodaoG: 0.78, //25cm
+            bastidorPequeno: 13.99, // 15 cm
+            bastidorGrande: 14.99, //20cm
+            algodaoBastidorPequeno: 0.48,
+            algodaoBastidorGrande: 0.80,
         };
 
         // Obter seleções
         const moldura = document.getElementById("moldura").value;
-        const cordao = document.getElementById("cordao").value;
-        const algodao = document.getElementById("algodao").value;
+        const algodaoMoldura = document.getElementById("algodaoMoldura").value;
+
+        const bastidor = document.getElementById("bastidor").value;
+        const algodaoBastidor = document.getElementById("algodaoBastidor").value;
 
         // Obter entradas numéricas
-        const linha = parseFloat(document.getElementById("linha").value) || 0;
+        const linha_moldura = parseFloat(document.getElementById("linhaMoldura").value) || 0;
+        const linha_bastidor = parseFloat(document.getElementById("linhaBastidor").value) || 0;
         const fita = parseFloat(document.getElementById("fita").value) || 0;
-        const cartaoVisita = parseFloat(document.getElementById("visita").value) || 0;
-        const flyer = parseFloat(document.getElementById("flyer").value) || 0;
-        const papel = parseFloat(document.getElementById("papel").value) || 0;
-        const adesivo = parseFloat(document.getElementById("adesivo").value) || 0;
+        const papel_craft = parseFloat(document.getElementById("papel_craft").value) || 0;
+        const bolha = parseFloat(document.getElementById("bolha").value) || 0;
         const hora = parseFloat(document.getElementById("hora").value) || 0;
-        const caixa = parseFloat(document.getElementById("caixa").value) || 0;
         const etiquetaC = parseFloat(document.getElementById("etiquetaCorreio").value) || 0;
-        const etiquetaM = parseFloat(document.getElementById("etiqueta").value) || 0;
         const passagemOnibus = parseFloat(document.getElementById("passagemOnibus").value) || 0;
         const layout = parseFloat(document.getElementById("layout").value) || 0;
         const depreciacao = parseFloat(document.getElementById("depreciacao").value)  || 0;
         const custoFixo = parseFloat(document.getElementById("custoFixo").value) || 0;
-        
 
-        // Valor por metro de linha, papel, adesivo (você pode ajustar)
-        const precoPorMetroLinha = 0.43;
-        const precoPorFolhaPapel = 0.21;
-        const precoPorAdesivo = 0.02;
-        const precoCartaoVisita = 0.36;
-        const precoFlyer = 0.40;
-        // valor fita
+        // custos com valores variáveis
+        const precoPorMetroLinha = 0.50; // 8 metros = R$ 4,00
+        const precoFitaAcabamento = 0.30; // 50 metros = R$ 15,00
+        const precoPapelCraft = 0.21;
         const valorHora = 6.90;
         const valorCaixa = 2.10;
-        const etiquetaCorreio = 0.75;
-        const etiquetaMarca = 0.26;
+        const precoEtiquetaCorreio = 0.80;
+        const precoPlasticoBolha = 0.31; // 100 metros = R$ 30,41
+        const precoPapelKraft = 0.16; // 100 metros = R$15,31
         
+        // custos com valores fixos
+        const cuidadoFragil = 0.04; // 500 unidades = R$19,90
+        const lacreSeguranca = 0.02; // 1000 unidades = R$21,58
+        const cartinhaEnvelope = 0.22;
+        const cadernoBrinde = 2.66;
+        const etiquetaMarca = 0.15;
+        const flyer = 0.36; // cuidado com o bordado
+        const cartaoVisita = 0.36;
+        const caixaEnvio = 3.80 //caixa da moldura;
+        const papel_seda = 0.20;
+
+
         // Cálculo
         const total =
             (valores[moldura] || 0) +
-            (valores[algodao] || 0) +
-            (linha * precoPorMetroLinha) +
-            (papel * precoPorFolhaPapel) +
-            (adesivo * precoPorAdesivo) +
-            (cartaoVisita * precoCartaoVisita) +
-            (flyer * precoFlyer) +
+            (valores[algodaoMoldura] || 0) +
+            (valores[bastidor] || 0) +
+            (valores[algodaoBastidor] || 0) +
+            (linha_moldura * precoPorMetroLinha) +
+            (linha_bastidor * precoPorMetroLinha) +
+            (etiquetaC * precoEtiquetaCorreio) +
+            (fita * precoFitaAcabamento) +
+            (papel_craft * precoPapelCraft) +
+            (bolha * precoPlasticoBolha) +
             (hora * valorHora) + 
-            (caixa * valorCaixa) +
-            (etiquetaC * etiquetaCorreio) +
-            (etiquetaM * etiquetaMarca) +
+            cuidadoFragil +
+            lacreSeguranca +
+            cartinhaEnvelope +
+            cadernoBrinde +
+            etiquetaMarca +
+            flyer +
+            cartaoVisita +
+            caixaEnvio +
+            papel_seda +
             passagemOnibus +
             layout +
             depreciacao +
             custoFixo;
 
-        const insumos = total + (total * 0.1);
+        const insumos = total + (total * 0.05);
         const lucro = insumos * 0.3;
         
 
