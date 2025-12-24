@@ -65,13 +65,11 @@
 <form>
     <label for="tipo">Moldura:</label>
     <select id="moldura" required>
-        <option value="molduraPequeno">Moldura - 20 cm</option>
         <option value="molduraMedio">Moldura - 25 cm</option>
     </select>
     
     <label for="tipo">Algodão para Moldura:</label>
     <select id="algodaoMoldura" required>
-        <option value="algodaoMolduraPequeno">Algodão Moldura - 20 cm</option>
         <option value="algodaoMolduraGrande">Algodão Moldura - 25 cm</option>
     </select>
 
@@ -159,9 +157,7 @@
         event.preventDefault();
         // Valores fixos para tamanhos
         const valores = {
-            molduraPequeno: 31, // 20cm
             molduraMedio: 37, // 25cm
-            algodaoMolduraPequeno: 0.80,
             algodaoMolduraGrande: 1.27,
 
             bastidorPequeno: 13.99, // 15 cm
